@@ -22,32 +22,48 @@ var con = mysql.createConnection({
 
 
 app.get('/',(req,res) => {
-    console.log("Request @ -> " + req.url);
+    console.log("Get Request @ -> " + req.url);
     res.render('index')
 })
 
-app.post('/signup',urlencodedParser, (req,res) => {
-    console.log("Request @ -> " + req.url);
-    console.log('Username -> ' + req.body.username)
+app.get('/signup',(req,res) => {
+    console.log("Get Request @ -> " + req.url);
+    res.render('signup')
+})
+
+app.post('/signup', urlencodedParser,  (req,res) => {
+    console.log("Post Request @ -> " + req.url);
+    console.log(req.body)
+    res.redirect('/signup')
+})
+
+app.get('/login', (req,res) => {
+    console.log("Get Request @ -> " + req.url);
+    res.render('login')
+})
+
+app.post('/login',urlencodedParser, (req,res) => {
+    console.log("Post Request @ -> " + req.url);
+    console.log('Username -> ' + req.body.email)
     console.log('Password -> ' + req.body.password)
-    con.query("SELECT * FROM user", function (err, result, fields) {
+    con.query("SELECT * FROM user where email='"+req.body.email+"' and password='"+req.body.password+"'", function (err, result, fields) {
         if (err) throw err
         console.log("Results are => ")
         console.log(result)
-        if(result[0].email === req.body.username){
-            console.log("Username is same")
+        if(result[0].email === req.body.email){
+            console.log("Email is same")
             if(result[0].password === req.body.password)
                 console.log("Password is same")
             else
                 console.log("Password is different")
         }
         else
-        console.log("Username is different")
+        console.log("Email is different")
         // console.log("Fields are => ")
         // console.log(fields)
-      });
-    res.redirect('/')
+      })
+    res.redirect('/login')
 })
 
 app.listen(3000)
-console.log('Listening at port 3000')
+console.log('Listening at port 3000');

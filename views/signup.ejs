@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Signup</title>
+</head>
+<body>
+    <div class="container">
+    <h1>This is signup page</h1>
+    <div class="row">
+        <form class="col s12" action="/signup" method="POST">
+          <div class="row">
+            <div class="input-field col s6">
+                <input id="first_name" type="text" name="first_name" class="validate">
+                <label for="first_name">First Name</label>
+              </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" name="last_name" class="validate">
+              <label for="last_name">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="password" type="password" class="validate" name="password">
+              <label for="password">Password</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="confirmPassword" type="password" class="validate" name="confirmPassword">
+                <label for="confirmPassword">Confirm Password</label>
+              </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email" type="email" name="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s6">
+                <label for="dob">Date of birth</label>
+                <input type="text" id="dob" name="dob" class="datepicker">
+            </div>
+
+            <div class="input-field col s6">
+                    <select name="gender">
+                      <option value="" disabled selected>Choose your Gender</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                      <option value="X">Does want to share</option>
+                    </select>
+                    <label>Gender</label>
+                  </div>
+          </div>
+
+          <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="status" name="status" class="materialize-textarea" data-length="120"></textarea>
+                  <label for="status">Status</label>
+                </div>
+         </div>
+
+          <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div> 
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, {yearRange: 70, format: 'dd-mmm-yyyy'});
+        
+            var selMenu = document.querySelectorAll('select');
+            var selinstances = M.FormSelect.init(selMenu, {});
+
+            $('textarea#status').characterCounter();
+        });
+    </script>
+</body>
+</html>
