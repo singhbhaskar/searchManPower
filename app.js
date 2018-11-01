@@ -38,21 +38,20 @@ var con = mysql.createConnection({
     console.log('Username -> ' + req.body.email)
     console.log('Password -> ' + req.body.password)
     let clientUser='', clientPassword=''
+    let flag = 1
     try{
         con.query("SELECT * FROM user where email='"+req.body.email+"' and password='"+req.body.password+"'", 
         function (err, result, fields) {
-            let flag = 1 
             if (err) {
                 console.error(err)
-                flag = 0
             }
             if(flag){
                 console.log("Results are => ")
                 console.log(result + " the length is- "+ result.length)
-                if(result.length == 0){
-                    redirect('login')
-                }
-                if(result.length != undefined){
+                // if(result.length == 0){
+                //     res.redirect('invalidLogin')
+                // }
+                if(result.length != 0){
                     clientUser = result[0].email
                     clientPassword = result[0].password
                     if(clientUser === req.body.email){
@@ -70,25 +69,45 @@ var con = mysql.createConnection({
                 }
                 else{
                     console.log("Wrong credentials")
+                    flag = 0
                 }
                 // console.log("Fields are => ")
                 // console.log(fields)
                 // console.log("2Password is same " + req.session.user)
             }
         })
+    setTimeout(() => {
+        console.log('flag is : ' + flag)
+        if(flag == 0){
+            console.log('redirecting to invalidLogin')
+            res.redirect('/invalidLogin')
+        }
+        else{
+            console.log('redirecting to protected')
+            res.redirect('/protected')
+        }
+    }, 100) 
     }
     catch(e){
-        redirect('login')
+        res.redirect('login')
     }
-    setTimeout(function () {
-        res.redirect('/protected')
-    }, 100)
 })  
 
 
 app.get('/',(req,res) => {
     console.log("Get Request @ -> " + req.url);
     res.render('index', {id: 'some'})
+})
+
+app.get('/invalidLogin',(req,res) => {
+    console.log("Get Request @ -> " + req.url);
+    if(req.headers.referer == undefined){
+        res.redirect('/')
+    }
+    else{
+        let mess = "invalide credentials"
+        res.render('invalidlogin', {msg: mess})
+    }
 })
 
 app.get('/signup',(req,res) => {
@@ -104,6 +123,7 @@ app.post('/signup', urlencodedParser,  (req,res) => {
 
 app.get('/login', (req,res) => {
     console.log("Get Request @ -> " + req.url);
+    console.log('this is referer' + req.headers.referer)
     res.render('login')
 })
 
