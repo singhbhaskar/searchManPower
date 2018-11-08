@@ -9,6 +9,16 @@ module.exports = (app, con, urlencodedParser, session) => {
         store: new MemoryStore(),
         saveUninitialized: true
     }))
+
+    app.get('/',(req,res) => {
+        console.log("Get Request @ -> " + req.url);
+        if(req.session.user){
+            res.render('index', {user: true})
+        }
+        else{
+            res.render('index', {user: false})
+        }
+    })
     
     app.get('/logout', (req,res) => {
         console.log("Get Request @ -> " + req.url);
@@ -31,6 +41,51 @@ module.exports = (app, con, urlencodedParser, session) => {
             res.redirect("/")
         }
         
+    })
+    //provider Profile
+    app.get('/providerProfile', (req, res) => {
+        console.log("Get Request @ -> " + req.url)
+        console.log('this is referer -> ' + req.headers.referer)
+        let id = req.query.id
+        let qs = "SELECT * FROM user WHERE id=" + id
+        con.query(qs, (err, results) => {
+            if(err) throw err;
+            console.log(results);
+        })
+        setTimeout(() => {
+            res.redirect(req.headers.referer)
+        }, 50)
+    })
+
+    //search
+    app.get('/search',urlencodedParser, (req,res) => {
+        let rows;
+        console.log("GET Request @ -> " + req.url)
+        let qs = req.query.search
+        let query = "SELECT * FROM user where firstName LIKE \'%" + qs +"%\' or lastName LIKE \'%" + qs + "%\'"
+        try{
+            con.query(query, (err, results) => {
+                if (err) throw err
+                rows = results
+                // console.log(results)
+            })
+        }
+        catch(e){
+            console.log(e)
+        }
+
+        setTimeout(() => {
+            if(req.session.user){
+                console.log(rows)
+                console.log("after login")
+                res.render('search', {user: true, rows: rows, l: rows.length})
+            }
+            else{
+                console.log(rows)
+                console.log("before login")
+                res.render('search', {user: false, rows: rows, l: rows.length})
+            }
+        },100)
     })
 
     
@@ -85,13 +140,13 @@ module.exports = (app, con, urlencodedParser, session) => {
                 res.redirect('/invalidLogin')
             }
             else{
-                console.log('redirecting to protected')
-                res.redirect('/protected')
+                console.log('redirecting to home page')
+                res.redirect('/')
             }
         }, 100) 
         }
         catch(e){
-            res.redirect('login')
+            res.redirect('/')
         }
     })  
 

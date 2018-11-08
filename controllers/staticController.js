@@ -1,9 +1,4 @@
 module.exports = (app, con, urlencodedParser) => {
-    app.get('/',(req,res) => {
-        console.log("Get Request @ -> " + req.url);
-        res.render('index', {id: 'some'})
-    })
-    
 
     app.get('/invalidLogin',(req,res) => {
         console.log("Get Request @ -> " + req.url);
@@ -26,6 +21,7 @@ module.exports = (app, con, urlencodedParser) => {
         console.log('this is referer' + req.headers.referer)
         res.render('login')
     })
+
 
     //signUp new user
     app.post('/signup', urlencodedParser,  (req,res) => {

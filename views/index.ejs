@@ -18,14 +18,26 @@
     <title>Home</title>
 </head>
 <body>
-
-    <% include ./partials/nav.ejs %>
+    <%if (user) {%>
+    <%  include ./partials/protectedNav.ejs %>
+    <% } else {%>
+    <%  include ./partials/nav.ejs %>
+    <% } %>
 
     <div class="container">
-        <h1>Welcome to the home page! <%= id %></h1>
-        <a href="/login"><button class="btn waves-effect waves-light">Login</button></a>
-        <br>
-        <a href="/signup"><button class="btn waves-effect waves-light">SignUp</button></a>
+        <div style="height: 92vh; padding-top: 40vh" id="searchDiv">
+            <nav class="centre-align">
+                <div class="nav-wrapper deep-orange darken-3">
+                    <form action="/search" method="GET">
+                        <div class="input-field">
+                        <input name="search" id="search" type="search" required placeholder="Search">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <!-- Compiled and minified JavaScript -->
