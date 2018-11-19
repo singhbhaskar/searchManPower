@@ -117,12 +117,12 @@
                 <% if(reviews.length > 0) { %>
                     <% for(let i=0; i< reviews.length; i++){ %>
                         <div class="row" style="margin-bottom: 0">
-                            <h3 class="col m6 left-align"><%= reviews[i].firstName + ' ' + reviews[i].lastName %></h3>
-                            <h3 class="col m6 right-align">Rating: <%= reviews[i].rating %>/5</h3>
+                            <h4 class="col m6 left-align"><%= reviews[i].firstName + ' ' + reviews[i].lastName %></h4>
+                            <h4 class="col m6 right-align">Rating: <%= reviews[i].rating %>/5</h5>
                         </div>
     
                         <div class="row">
-                            <h4>- <%= reviews[i].email %></h4>
+                            <h5>- <%= reviews[i].email %></h5>
                         </div>
     
                         <div class="row">

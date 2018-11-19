@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/style.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Provider</title>
+</head>
+<body>
+    <%if (user) {%>
+    <%  include ./partials/protectedNav.ejs %>
+    <% } else {%>
+    <%  include ./partials/nav.ejs %>
+    <% } %>
+
+    <% if(profile) {%>
+
+        <div class="row" style="padding-left: 7vw; margin-top: 10vh">
+            <div class="col m11 card" style="padding-top: 1vh">
+                    <div class="row">
+                            <div class="col s12 m5 card-image">
+                                    <img src="https://images.pexels.com/photos/1131387/pexels-photo-1131387.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260">
+                                    <span class="card-title"><%= profile.firstName + ' ' + profile.lastName %></span>
+                                </div> 
+                        
+                                <table class="col s12 m7 white centered">
+                                        <thead>
+                                            <tr>
+                                                <th>My</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                            
+                                        <tbody>
+                            
+                                            <tr>
+                                                <td>Name</td>
+                                                <td><%= profile.firstName + ' ' + profile.lastName %></td>
+                                            </tr>
+                            
+                                            <tr>
+                                                <td>Email</td>
+                                                <td><%= profile.email %></td>
+                                            </tr>
+                            
+                                            <tr>
+                                                <td>Date of birth</td>
+                                                <td><%= profile.dob %></td>
+                                            </tr>
+                            
+                                            <tr>
+                                                <td>Gender</td>
+                                                <td><%= profile.gender %></td>
+                                            </tr>
+                            
+                                            <tr>
+                                                <td>Status</td>
+                                                <td><%= profile.status %></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>
+                                                        <a href="/changePassword">
+                                                            <button class="deep-orange darken-3 waves-effect waves-light btn">Change Password</button>
+                                                        </a>
+                                                </td>
+                                                <td>
+                                                    <a href="/update">
+                                                        <button class="deep-orange darken-3 waves-effect waves-light btn">Update</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                    </tbody>
+                                
+                                </table>
+                    </div>
+            </div>
+        </div>
+    <% } else {%>
+        <h1 class="center-align">The Profile is not in the list go back!!!</h1>
+        <a href="/" style="padding-left: 45vw"><button class="deep-orange darken-3 waves-effect waves-light btn-large">GO BACK</button></a>
+    <% } %>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('textarea#icon_prefix2').characterCounter();
+        });
+    </script>
+</body>
+</html>

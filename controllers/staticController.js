@@ -22,6 +22,12 @@ module.exports = (app, con, urlencodedParser) => {
         res.render('login')
     })
 
+    //refresh
+    app.get('/refresh', (req,res) => {
+        console.log("GET Request @ -> " + req.url);
+        res.redirect(req.headers.referer)
+    })
+
 
     //signUp new user
     app.post('/signup', urlencodedParser,  (req,res) => {
