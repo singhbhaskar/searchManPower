@@ -6,8 +6,12 @@ const mysql = require('mysql')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 
+// requiring controller
+
 let controller = require("./controllers/control")
 let staticController = require("./controllers/staticController")
+let searchController = require("./controllers/searchController")
+let loginController = require("./controllers/loginController")
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })  
 app.set('view engine','ejs')
@@ -40,6 +44,9 @@ app.use(session({
 
 controller(app, con, urlencodedParser)
 staticController(app, con, urlencodedParser)
+loginController(app, con, urlencodedParser)
+searchController(app, con, urlencodedParser)
+
 
 app.listen(3000, (err) => {
     if(err)

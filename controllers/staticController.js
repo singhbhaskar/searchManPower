@@ -1,26 +1,5 @@
 module.exports = (app, con, urlencodedParser) => {
 
-    app.get('/invalidLogin',(req,res) => {
-        console.log("Get Request @ -> " + req.url);
-        if(req.headers.referer == undefined){
-            res.redirect('/')
-        }
-        else{
-            let mess = "invalide credentials"
-            res.render('invalidlogin', {msg: mess})
-        }
-    })
-
-    app.get('/signup',(req,res) => {
-        console.log("Get Request @ -> " + req.url);
-        res.render('signup')
-    })
-
-    app.get('/login', (req,res) => {
-        console.log("Get Request @ -> " + req.url);
-        console.log('this is referer' + req.headers.referer)
-        res.render('login')
-    })
 
     //refresh
     app.get('/refresh', (req,res) => {
