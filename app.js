@@ -28,7 +28,17 @@ con.connect(function(err) {
         console.log("Database Connected!")
 })
 
-controller(app, con, urlencodedParser, session)
+var MemoryStore = session.MemoryStore;
+
+app.use(session({
+    name : 'app.sid',
+    secret: "1234567890QWERTY",
+    resave: true,
+    store: new MemoryStore(),
+    saveUninitialized: true
+}))
+
+controller(app, con, urlencodedParser)
 staticController(app, con, urlencodedParser)
 
 app.listen(3000, (err) => {

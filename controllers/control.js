@@ -1,14 +1,4 @@
-module.exports = (app, con, urlencodedParser, session) => {
-
-    var MemoryStore = session.MemoryStore;
-
-    app.use(session({
-        name : 'app.sid',
-        secret: "1234567890QWERTY",
-        resave: true,
-        store: new MemoryStore(),
-        saveUninitialized: true
-    }))
+module.exports = (app, con, urlencodedParser) => {
 
     app.get('/',(req,res) => {
         console.log("Get Request @ -> " + req.url);
