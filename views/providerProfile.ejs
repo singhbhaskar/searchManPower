@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/assets/style.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ 
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Provider</title>
+</head>
+<body>
+    <%if (user) {%>
+    <%  include ./partials/protectedNav.ejs %>
+    <% } else {%>
+    <%  include ./partials/nav.ejs %>
+    <% } %>
+
+    <% if(provider == null){ %>
+        <h1 class="center-align">The Service Provide is not in the list go back!!!</h1>
+        <a href="/" style="padding-left: 45vw"><button class="deep-orange darken-3 waves-effect waves-light btn-large">GO BACK</button></a>
+    <% } else { %>
+    
+    <div class="row" style="padding-left: 4vw">
+        <div class="col m11 card" style="padding-top: 1vh">
+                <div class="row">
+                        <div class="col s12 m5 card-image">
+                                <img src="https://images.pexels.com/photos/1131387/pexels-photo-1131387.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260">
+                                <span class="card-title">Card Title</span>
+                            </div> 
+                    
+                            <table class="col s12 m7 white centered">
+                                    <thead>
+                                        <tr>
+                                            <th>Provider</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                        
+                                    <tbody>
+                        
+                                        <tr>
+                                            <td>Name</td>
+                                            <td><%= provider.firstName + ' ' + provider.lastName %></td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td>Email</td>
+                                            <td><%= provider.email %></td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td>Age</td>
+                                            <td><%= provider.age %></td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td>Gender</td>
+                                            <td><%= provider.gender %></td>
+                                        </tr>
+                        
+                                        <tr>
+                                            <td>Status</td>
+                                            <td><%= provider.status %></td>
+                                        </tr>
+                                    
+                                </tbody>
+                            
+                             </table>
+                </div>
+        </div>
+    </div>
+    <% } %>
+
+    <% if(user) {%>
+        <div class="row" style="padding-left: 4vw">
+            <div class="col m11 card" style="padding-top: 1vh">
+                <h2 class="center-align">Add Review</h2>
+                <div class="container">
+                <form action="/reviewSubmit" method="POST" style="padding-bottom: 3vh">
+                    <div class="input-field">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="icon_prefix2" name="review" class="materialize-textarea" data-length="120"></textarea>
+                    <label for="icon_prefix2">Review</label>
+                    </div>
+
+                    <input type="text" name="id" style="display: none" value="<%= id %>">
+
+                    <div class="input-field">
+                        <p class="range-field">
+                            <i class="material-icons prefix">star</i>
+                            <input id="range2" type="range" name="rating" id="test5" min="0" max="5" />
+                        </p>
+                    </div>
+
+                    <button class="btn waves-effect waves-light" type="submit">Send
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="row" style="padding-left: 4vw">
+        <div class="col m11 card" style="padding-top: 1vh">
+            <h2 class="center-align">Reviews</h2>
+            <div class="container">
+                <% if(reviews.length > 0) { %>
+                    <% for(let i=0; i< reviews.length; i++){ %>
+                        <div class="row" style="margin-bottom: 0">
+                            <h3 class="col m6 left-align"><%= reviews[i].firstName + ' ' + reviews[i].lastName %></h3>
+                            <h3 class="col m6 right-align">Rating: <%= reviews[i].rating %>/5</h3>
+                        </div>
+    
+                        <div class="row">
+                            <h4>- <%= reviews[i].email %></h4>
+                        </div>
+    
+                        <div class="row">
+                            <p><%= reviews[i].review %></p>
+                        </div>
+    
+                        <hr>
+                    <% } %>
+                <% } else { %>
+                    <h2 style="padding-left: 8vw">Sorry no reviews! Login to add review!</h2>
+                <% } %>
+
+                <!-- <div class="review"> -->
+                    <!-- <div class="row" style="margin-bottom: 0"> -->
+                        <!-- <h4 class="col m6 left-align">Name</h3> -->
+                        <!-- <h4 class="col m6 right-align">Rating: 4/5</h3> -->
+                    <!-- </div> -->
+                    <!-- <div class="row"> -->
+                        <!-- <p>-userid</p> -->
+                    <!-- </div> -->
+                    <!-- <div class="row"> -->
+                        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, odit.</p> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+<!--  -->
+                <!-- <hr> -->
+                <!--  -->
+                <!-- <div class="row" style="margin-bottom: 0"> -->
+                    <!-- <h4 class="col m6 left-align">Name</h3> -->
+                    <!-- <h4 class="col m6 right-align">Rating: 4/5</h3> -->
+                <!-- </div> -->
+                <!-- <div class="row"> -->
+                    <!-- <p>-userid</p> -->
+                <!-- </div> -->
+                <!-- <div class="row"> -->
+                    <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, odit.</p> -->
+                <!-- </div> -->
+            <!-- </div> -->
+<!--  -->
+
+            </div>
+        </div>
+    </div>
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('textarea#icon_prefix2').characterCounter();
+        });
+    </script>
+</body>
+</html>
