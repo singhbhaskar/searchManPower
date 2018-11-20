@@ -12,6 +12,8 @@ let controller = require("./controllers/control")
 let staticController = require("./controllers/staticController")
 let searchController = require("./controllers/searchController")
 let loginController = require("./controllers/loginController")
+let profileController = require("./controllers/profileController")
+
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })  
 app.set('view engine','ejs')
@@ -46,6 +48,7 @@ controller(app, con, urlencodedParser)
 staticController(app, con, urlencodedParser)
 loginController(app, con, urlencodedParser)
 searchController(app, con, urlencodedParser)
+profileController(app, con, urlencodedParser)
 
 
 app.listen(3000, (err) => {
