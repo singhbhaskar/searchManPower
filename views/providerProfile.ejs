@@ -34,7 +34,7 @@
                 <div class="row">
                         <div class="col s12 m5 card-image">
                                 <img src="https://images.pexels.com/photos/1131387/pexels-photo-1131387.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260">
-                                <span class="card-title">Card Title</span>
+                                <span class="card-title"><%= provider.firstName + ' ' + provider.lastName %></span>
                             </div> 
                     
                             <table class="col s12 m7 white centered">
@@ -48,23 +48,33 @@
                                     <tbody>
                         
                                         <tr>
-                                            <td>Name</td>
-                                            <td><%= provider.firstName + ' ' + provider.lastName %></td>
-                                        </tr>
-                        
-                                        <tr>
                                             <td>Email</td>
                                             <td><%= provider.email %></td>
                                         </tr>
+
+                                        <tr>
+                                            <td>Cost</td>
+                                            <td>₹ <%= ' ' + provider.cost %></td>
+                                        </tr>
                         
                                         <tr>
-                                            <td>Age</td>
-                                            <td><%= provider.age %></td>
+                                            <td>Address</td>
+                                            <td><%= provider.address + ', ' + provider.pincode %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Timings</td>
+                                            <td><%= provider.serviceTiming %></td>
                                         </tr>
                         
                                         <tr>
                                             <td>Gender</td>
                                             <td><%= provider.gender %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Phone</td>
+                                            <td><%= provider.phone %></td>
                                         </tr>
                         
                                         <tr>

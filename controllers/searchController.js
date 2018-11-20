@@ -32,7 +32,7 @@ module.exports = (app, con, urlencodedParser) => {
         let id = req.query.id
         let row
         let row2
-        let qs = "SELECT * FROM user WHERE id=" + id
+        let qs = "SELECT * FROM providers WHERE providerId=" + id
         con.query(qs, (err, results) => {
             if(err) throw err;
             // console.log(results);
@@ -73,7 +73,7 @@ module.exports = (app, con, urlencodedParser) => {
         let rows;
         console.log("GET Request @ -> " + req.url)
         let qs = req.query.search
-        let query = "SELECT * FROM user where firstName LIKE \'%" + qs +"%\' or lastName LIKE \'%" + qs + "%\'"
+        let query = "SELECT * FROM providers where firstName LIKE \'%" + qs +"%\' or lastName LIKE \'%" + qs + "%\'"
         try{
             con.query(query, (err, results) => {
                 if (err) throw err
