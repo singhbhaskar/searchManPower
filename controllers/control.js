@@ -61,4 +61,29 @@ module.exports = (app, con, urlencodedParser) => {
 
     })
 
+    app.get('/myorders', (req, res) => {
+        let user = req.session.user
+        let qs ="SELECT u.firstName consumer, p.firstName provider, o.orderStatus, p.cost, o.appointment"
+        qs += " FROM orders o, user u, providers p WHERE u.id=o.consumerId AND p.providerId=o.providerId"
+        qs += " AND u.id='" +  user + "'"
+        let row;
+
+        if(user){
+            con.query(qs, (err, results) => {
+                if (err) console.error(err)
+                console.log("this is res")
+                console.log(results)
+                row = results
+            })
+        }
+        else{
+            res.redirect('/')
+        }
+
+        setTimeout(() => {
+            console.log(row)
+            res.render('myorders', {user: true, orders: row, l: row.length})
+        })
+    })
+
 };

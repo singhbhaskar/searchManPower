@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser')
 let controller = require("./controllers/control")
 let staticController = require("./controllers/staticController")
 let searchController = require("./controllers/searchController")
-let loginController = require("./controllers/loginController")
+let consumerLoginController = require("./controllers/consumerLoginController")
 let profileController = require("./controllers/profileController")
 
 
@@ -46,7 +46,7 @@ app.use(session({
 
 controller(app, con, urlencodedParser)
 staticController(app, con, urlencodedParser)
-loginController(app, con, urlencodedParser)
+consumerLoginController(app, con, urlencodedParser)
 searchController(app, con, urlencodedParser)
 profileController(app, con, urlencodedParser)
 
