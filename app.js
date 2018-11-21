@@ -13,6 +13,7 @@ let staticController = require("./controllers/staticController")
 let searchController = require("./controllers/searchController")
 let consumerLoginController = require("./controllers/consumerLoginController")
 let profileController = require("./controllers/profileController")
+let consumerOrderController = require("./controllers/consumerOrderController")
 
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })  
@@ -49,6 +50,7 @@ staticController(app, con, urlencodedParser)
 consumerLoginController(app, con, urlencodedParser)
 searchController(app, con, urlencodedParser)
 profileController(app, con, urlencodedParser)
+consumerOrderController(app, con, urlencodedParser)
 
 
 app.listen(3000, (err) => {
